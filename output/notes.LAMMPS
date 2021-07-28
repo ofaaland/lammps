@@ -19,3 +19,10 @@ example syntax
 	read_restart molecular-mix.%.restart.*
 		reads in checkpoint files with rank where "%" is and timestep number where "*" is
 		reads in the latest checkpoint - unsure if that is by mtime or by timestep number
+
+C++
+	("format {} stuff", fubar) is equivalent to sprintf(tmpstr, "format %s stuff", (char *)fubar)
+		but without the need to allocate and free tmpstr.
+
+Logging
+	By default, utils::logmesg() seems to log to log.lammps only on rank 0.  Other ranks log to stout.
