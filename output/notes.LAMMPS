@@ -1,0 +1,21 @@
+doc/src/Developer_write.rst: says writing a "Fix" is a (the?) way to extend LAMMPS
+	But I think this may apply only to extending the simulation, that is the way atoms interact.
+	- see src/fix_read_restart.{h,cpp} with class FixReadRestart
+	- this appears to include "fix" variables in the data read from restarts
+
+To use read_restart:
+	original in.* file must have "region", "create_box", "create_atoms", and "restart" commands
+	next in.* file must not have "region", "create_box", "create_atoms" commands
+	## maybe must not have reset_timestep
+	next in.* file must have "read_restart" command
+
+example syntax
+	restart 1000 molecular-mix.%.restart fileper 1
+		writes checkpoint files every 1000 timesteps
+		one checkpoint file per process
+		file names have rank where "%" is
+		fil enames have timestep number appended to end
+
+	read_restart molecular-mix.%.restart.*
+		reads in checkpoint files with rank where "%" is and timestep number where "*" is
+		reads in the latest checkpoint - unsure if that is by mtime or by timestep number
