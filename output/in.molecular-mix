@@ -37,6 +37,7 @@ reset_timestep 0
 velocity all create 100.0 6234235
 fix 1 all nvt temp 100.0 300.0 1.0
 # dump 1 all custom 100 cychex-methane.lammpstrj id xu yu zu
+restart 1000 molecular-mix.%1.restart fileper 1
 run 2500
 #write_data molecular-mix.data
-#write_restart molecular-mix.restart
+#write_restart molecular-mix.%1.restart
