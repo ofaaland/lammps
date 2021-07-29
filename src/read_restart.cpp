@@ -104,7 +104,7 @@ void ReadRestart::command(int narg, char **arg)
 
   if (me == 0) {
     utils::logmesg(lmp,"Reading restart file ...\n");
-    std::string hfile = file;
+    std::string hfile = (std::string)restart_prefix + file;
     if (multiproc) {
       hfile.replace(hfile.find("%"),1,"base");
     }
@@ -268,7 +268,7 @@ void ReadRestart::command(int narg, char **arg)
   else if (nprocs <= multiproc_file) {
 
     for (int iproc = me; iproc < multiproc_file; iproc += nprocs) {
-      std::string procfile = file;
+      std::string procfile = (std::string)restart_prefix + file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",iproc));
       fp = fopen(procfile.c_str(),"rb");
       if (fp == nullptr)
@@ -332,7 +332,7 @@ void ReadRestart::command(int narg, char **arg)
     MPI_Comm_split(world,icluster,0,&clustercomm);
 
     if (filereader) {
-      std::string procfile = file;
+      std::string procfile = (std::string)restart_prefix + file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",icluster));
       fp = fopen(procfile.c_str(),"rb");
       if (fp == nullptr)
