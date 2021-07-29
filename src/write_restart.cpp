@@ -234,9 +234,7 @@ void WriteRestart::write(std::string file)
     if (fp == nullptr)
       error->one(FLERR, "Cannot open restart file {}: {}",
                                     base, utils::getsyserror());
-    utils::logmesg(lmp,"WriteRestart::write() opened single/base file: {}\n", file);
-  } else {
-    utils::logmesg(lmp,"WriteRestart::write() no open yet, rank: {}\n", me);
+    utils::logmesg(lmp,"WriteRestart::write() opened single/base file: {} multiproc {}\n", file, multiproc);
   }
 
   // proc 0 writes magic string, endian flag, numeric version
@@ -300,7 +298,7 @@ void WriteRestart::write(std::string file)
       if (fp == nullptr)
         error->one(FLERR, "Cannot open restart file {}: {}",
                                       multiname, utils::getsyserror());
-      utils::logmesg(lmp,"WriteRestart::write() opened multiname file: {}\n", multiname);
+      utils::logmesg(lmp,"WriteRestart::write() fopened file {} rank {}\n", multiname, me);
       write_int(PROCSPERFILE,nclusterprocs);
     }
   }
