@@ -227,7 +227,7 @@ void WriteRestart::write(std::string file)
   // open single restart file or base file for multiproc case
 
   if (me == 0) {
-    std::string base = file;
+    std::string base = restart_prefix + file;
     if (multiproc) base.replace(base.find("%"),1,"base");
 
     fp = fopen(base.c_str(),"wb");
@@ -290,7 +290,7 @@ void WriteRestart::write(std::string file)
       fp = nullptr;
     }
 
-    std::string multiname = file;
+    std::string multiname = restart_prefix + file;
     multiname.replace(multiname.find("%"),1,fmt::format("{}",icluster));
 
     if (filewriter) {
