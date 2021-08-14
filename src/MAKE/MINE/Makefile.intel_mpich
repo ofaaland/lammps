@@ -14,7 +14,7 @@ SHFLAGS =	-fPIC
 DEPFLAGS =	-M
 
 LINK =		mpicxx
-LINKFLAGS =	-g -O3 -L$(SCR_INSTALL_DIR)/lib64 -lscr
+LINKFLAGS =	-g -O3 -L$(SCR_INSTALL_DIR)/lib64 -lscr -Wl,-rpath,$(SCR_INSTALL_DIR)/lib64
 LIB =
 SIZE =		size
 
