@@ -2,8 +2,15 @@ BUILDING:
 	See doc/src/Build_* or point browser to https://docs.lammps.org/Build.html
 		Attempted with TCE provided compilers and MPI
 			1) intel/19.0.4   2) mvapich2/2.3
-			Need the Makefile to provide the -std=c++11 flag
-				otherwise #if __cplusplus < 201103L and so build fails
+			Created MAKE/MINE/Makefile.intel_mpich to add -std=c++11 required to "CC"
+	cd src
+	# "make serial" fails, so skip it; seems not to cause a problem
+	make yes-molecule
+	make -j36 intel_mpich
+	export LMP=/p/vast1/faaland1/projects/scr/code/LAMMPS/src/lmp_intel_mpich
+	cd ../output
+	srun -n8 $LMP -i in.molecular-mix
+	# note if no "-i <infile>" is provided it hangs, waiting for input on stdin
 
 doc/src/Developer_write.rst: says writing a "Fix" is a (the?) way to extend LAMMPS
 	But I think this may apply only to extending the simulation, that is the way atoms interact.
