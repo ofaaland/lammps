@@ -35,6 +35,8 @@
 #include <mdi.h>
 #endif
 
+#include <scr.h>
+
 using namespace LAMMPS_NS;
 
 /* ----------------------------------------------------------------------
@@ -44,6 +46,7 @@ using namespace LAMMPS_NS;
 int main(int argc, char **argv)
 {
   MPI_Init(&argc, &argv);
+  if (SCR_Init()) MPI_Abort(MPI_COMM_WORLD, 1);
 
   MPI_Comm lammps_comm = MPI_COMM_WORLD;
 
@@ -105,5 +108,6 @@ int main(int argc, char **argv)
 #endif
   KokkosLMP::finalize();
   MPI_Barrier(lammps_comm);
+  SCR_Finalize();
   MPI_Finalize();
 }
