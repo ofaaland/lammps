@@ -6,13 +6,15 @@ SHELL = /bin/sh
 # compiler/linker settings
 # specify flags and libraries needed for your compiler
 
+# need to enable c++11 standard, and include SCR headers, and link in SCR libraries
+
 CC =		mpicxx -std=c++11
-CCFLAGS =	-g -O3
+CCFLAGS =	-g -O3 -I$(SCR_INSTALL_DIR)/include
 SHFLAGS =	-fPIC
 DEPFLAGS =	-M
 
 LINK =		mpicxx
-LINKFLAGS =	-g -O3
+LINKFLAGS =	-g -O3 -L$(SCR_INSTALL_DIR)/lib64 -lscr
 LIB =
 SIZE =		size
 
