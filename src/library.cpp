@@ -52,6 +52,7 @@
 
 #include <cstring>
 #include <vector>
+#include <scr.h>
 
 #if defined(LAMMPS_EXCEPTIONS)
 #include "exceptions.h"

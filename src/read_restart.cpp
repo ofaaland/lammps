@@ -37,6 +37,7 @@
 
 #include <cstring>
 #include <dirent.h>
+#include <scr.h>
 
 #include "lmprestart.h"
 
@@ -103,15 +104,19 @@ void ReadRestart::command(int narg, char **arg)
   // open single restart file or base file for multiproc case
 
   if (me == 0) {
+    int rc;
+    char new_path[SCR_MAX_FILENAME];
+
     utils::logmesg(lmp,"Reading restart file ...\n");
     std::string hfile = (std::string)restart_prefix + file;
     if (multiproc) {
       hfile.replace(hfile.find("%"),1,"base");
     }
-    fp = fopen(hfile.c_str(),"rb");
+    rc = SCR_Route_file(hfile.c_str(), new_path);
+    fp = fopen(new_path, "rb");
     if (fp == nullptr)
       error->one(FLERR,"Cannot open restart file {}: {}",
-                                   hfile, utils::getsyserror());
+                                   new_path, utils::getsyserror());
   }
 
   // read magic string, endian flag, format revision
@@ -268,12 +273,16 @@ void ReadRestart::command(int narg, char **arg)
   else if (nprocs <= multiproc_file) {
 
     for (int iproc = me; iproc < multiproc_file; iproc += nprocs) {
+      int rc;
+      char new_path[SCR_MAX_FILENAME];
+
       std::string procfile = (std::string)restart_prefix + file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",iproc));
-      fp = fopen(procfile.c_str(),"rb");
+      rc = SCR_Route_file(procfile.c_str(), new_path);
+      fp = fopen(new_path,"rb");
       if (fp == nullptr)
         error->one(FLERR,"Cannot open restart file {}: {}",
-                                     procfile, utils::getsyserror());
+                                     new_path, utils::getsyserror());
       utils::sfread(FLERR,&flag,sizeof(int),1,fp,nullptr,error);
       if (flag != PROCSPERFILE)
         error->one(FLERR,"Invalid flag in peratom section of restart file");
@@ -332,12 +341,16 @@ void ReadRestart::command(int narg, char **arg)
     MPI_Comm_split(world,icluster,0,&clustercomm);
 
     if (filereader) {
+      int rc;
+      char new_path[SCR_MAX_FILENAME];
+
       std::string procfile = (std::string)restart_prefix + file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",icluster));
-      fp = fopen(procfile.c_str(),"rb");
+      rc = SCR_Route_file(procfile.c_str(), new_path);
+      fp = fopen(new_path, "rb");
       if (fp == nullptr)
         error->one(FLERR,"Cannot open restart file {}: {}",
-                                     procfile, utils::getsyserror());
+                                     new_path, utils::getsyserror());
     }
 
     int procsperfile;

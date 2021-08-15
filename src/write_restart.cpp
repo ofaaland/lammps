@@ -36,6 +36,7 @@
 #include "update.h"
 
 #include <cstring>
+#include <scr.h>
 
 #include "lmprestart.h"
 
@@ -227,13 +228,17 @@ void WriteRestart::write(std::string file)
   // open single restart file or base file for multiproc case
 
   if (me == 0) {
+    int rc;
+    char new_path[SCR_MAX_FILENAME];
+
     std::string base = restart_prefix + file;
     if (multiproc) base.replace(base.find("%"),1,"base");
 
-    fp = fopen(base.c_str(),"wb");
+    rc = SCR_Route_file(base.c_str(), new_path);
+    fp = fopen(new_path, "wb");
     if (fp == nullptr)
       error->one(FLERR, "Cannot open restart file {}: {}",
-                                    base, utils::getsyserror());
+                                    new_path, utils::getsyserror());
     utils::logmesg(lmp,"WriteRestart::write() opened single/base file: {} multiproc {}\n", file, multiproc);
   }
 
@@ -294,11 +299,15 @@ void WriteRestart::write(std::string file)
     multiname.replace(multiname.find("%"),1,fmt::format("{}",icluster));
 
     if (filewriter) {
-      fp = fopen(multiname.c_str(),"wb");
+      int rc;
+      char new_path[SCR_MAX_FILENAME];
+
+      rc = SCR_Route_file(multiname.c_str(), new_path);
+      fp = fopen(new_path, "wb");
       if (fp == nullptr)
         error->one(FLERR, "Cannot open restart file {}: {}",
-                                      multiname, utils::getsyserror());
-      utils::logmesg(lmp,"WriteRestart::write() fopened file {} rank {}\n", multiname, me);
+                                      new_path, utils::getsyserror());
+      utils::logmesg(lmp,"WriteRestart::write() fopened file {} rank {}\n", new_path, me);
       write_int(PROCSPERFILE,nclusterprocs);
     }
   }
