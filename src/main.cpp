@@ -86,6 +86,7 @@ int main(int argc, char **argv)
   } catch (LAMMPSException &e) {
     KokkosLMP::finalize();
     MPI_Barrier(lammps_comm);
+    SCR_Finalize();
     MPI_Finalize();
     exit(1);
   } catch (fmt::format_error &fe) {

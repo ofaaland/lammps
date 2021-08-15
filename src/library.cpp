@@ -320,6 +320,7 @@ void lammps_mpi_init()
     char *args[] = { (char *)"liblammps" , nullptr  };
     char **argv = args;
     MPI_Init(&argc,&argv);
+    if (SCR_Init()) MPI_Abort(MPI_COMM_WORLD, 1);
   }
 }
 
@@ -349,6 +350,7 @@ void lammps_mpi_finalize()
     MPI_Finalized(&flag);
     if (!flag) {
       MPI_Barrier(MPI_COMM_WORLD);
+      SCR_Finalize();
       MPI_Finalize();
     }
   }
