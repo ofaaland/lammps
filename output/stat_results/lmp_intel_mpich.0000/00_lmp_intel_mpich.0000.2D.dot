@@ -1,0 +1,51 @@
+digraph G {
+	graph [type="stat_4_0"];
+	node [shape=record,style=filled,labeljust=c,height=0.2];
+	0 [pos="0,0", label="/", fillcolor="#AAAAAA", fontcolor="#FFFFFF", function="/", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1891502852 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_index_tuned_intra_MV2", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1794269801 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_binomial", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1764337313 [pos="0,0", label="", fillcolor="#e38e38", fontcolor="#000000", function="__GI__IO_getline_info", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1610326808 [pos="0,0", label="", fillcolor="#d55555", fontcolor="#000000", function="LAMMPS_NS::Input::file()", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1159466131 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_intra", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1135194732 [pos="0,0", label="", fillcolor="#d55555", fontcolor="#000000", function="__libc_start_main", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-1078940416 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPI_Bcast", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-913885967 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_impl", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-516925587 [pos="0,0", label="", fillcolor="#e38e38", fontcolor="#000000", function="__GI__IO_default_uflow", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-356329669 [pos="0,0", label="", fillcolor="#e38e38", fontcolor="#000000", function="fgets", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	-106515535 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIC_Recv", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	49501891 [pos="0,0", label="", fillcolor="#d55555", fontcolor="#000000", function="_start", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	52696333 [pos="0,0", label="", fillcolor="#d55555", fontcolor="#000000", function="main", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	192851782 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIC_Wait", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	641691511 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIDI_CH3I_Progress", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	743201573 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_MV2", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1040615552 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_index_tuned_intra_MV2", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1305767874 [pos="0,0", label="", fillcolor="#c71c71", fontcolor="#000000", function="MPIDI_CH3I_SMP_pull_header", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1415617364 [pos="0,0", label="", fillcolor="#b8e38e", fontcolor="#FFFFFF", function="MPIDI_CH3I_SMP_read_progress", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1733259241 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_intra", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1781599913 [pos="0,0", label="", fillcolor="#f1c71c", fontcolor="#000000", function="MPIR_Bcast_MV2", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1820728717 [pos="0,0", label="", fillcolor="#e38e38", fontcolor="#000000", function="__GI__IO_file_underflow", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	1881783063 [pos="0,0", label="", fillcolor="#e38e38", fontcolor="#000000", function="__read_nocancel", source="(null)", line="(null)", module="(null)", offset="(null)", vars="(null)", pc="(null)"];
+	743201573 -> -1891502852 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	1733259241 -> -1794269801 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-356329669 -> -1764337313 [label="(null)", bv="[0]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	52696333 -> -1610326808 [label="(null)", bv="[0-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	1040615552 -> -1159466131 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	49501891 -> -1135194732 [label="(null)", bv="[0-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1610326808 -> -1078940416 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1078940416 -> -913885967 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1764337313 -> -516925587 [label="(null)", bv="[0]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1610326808 -> -356329669 [label="(null)", bv="[0]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1794269801 -> -106515535 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	0 -> 49501891 [label="(null)", bv="[0-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1135194732 -> 52696333 [label="(null)", bv="[0-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-106515535 -> 192851782 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	192851782 -> 641691511 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1159466131 -> 743201573 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	1781599913 -> 1040615552 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	1415617364 -> 1305767874 [label="(null)", bv="[3,5-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	641691511 -> 1415617364 [label="(null)", bv="[3-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-1891502852 -> 1733259241 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-913885967 -> 1781599913 [label="(null)", bv="[1-7]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	-516925587 -> 1820728717 [label="(null)", bv="[0]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+	1820728717 -> 1881783063 [label="(null)", bv="[0]", count="(null)", rep="(null)", sum="(null)", tbv="(null)", tcount="(null)", tbvsum="(null)"]
+}
