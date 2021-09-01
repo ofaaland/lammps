@@ -231,7 +231,7 @@ void WriteRestart::write(std::string file)
     int rc;
     char new_path[SCR_MAX_FILENAME];
 
-    std::string base = restart_prefix + file;
+    std::string base = file;
     if (multiproc) base.replace(base.find("%"),1,"base");
 
     rc = SCR_Route_file(base.c_str(), new_path);
@@ -295,7 +295,7 @@ void WriteRestart::write(std::string file)
       fp = nullptr;
     }
 
-    std::string multiname = restart_prefix + file;
+    std::string multiname = file;
     multiname.replace(multiname.find("%"),1,fmt::format("{}",icluster));
 
     if (filewriter) {

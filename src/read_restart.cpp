@@ -108,7 +108,7 @@ void ReadRestart::command(int narg, char **arg)
     char new_path[SCR_MAX_FILENAME];
 
     utils::logmesg(lmp,"Reading restart file ...\n");
-    std::string hfile = (std::string)restart_prefix + file;
+    std::string hfile = file;
     if (multiproc) {
       hfile.replace(hfile.find("%"),1,"base");
     }
@@ -276,7 +276,7 @@ void ReadRestart::command(int narg, char **arg)
       int rc;
       char new_path[SCR_MAX_FILENAME];
 
-      std::string procfile = (std::string)restart_prefix + file;
+      std::string procfile = file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",iproc));
       rc = SCR_Route_file(procfile.c_str(), new_path);
       fp = fopen(new_path,"rb");
@@ -344,7 +344,7 @@ void ReadRestart::command(int narg, char **arg)
       int rc;
       char new_path[SCR_MAX_FILENAME];
 
-      std::string procfile = (std::string)restart_prefix + file;
+      std::string procfile = file;
       procfile.replace(procfile.find("%"),1,fmt::format("{}",icluster));
       rc = SCR_Route_file(procfile.c_str(), new_path);
       fp = fopen(new_path, "rb");

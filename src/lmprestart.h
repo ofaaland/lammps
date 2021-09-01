@@ -41,6 +41,4 @@ enum{VERSION,SMALLINT,TAGINT,BIGINT,
 
 #define LB_FACTOR 1.1
 
-#define restart_prefix "/p/lustre1/faaland1/lammps/"
-
 #endif
