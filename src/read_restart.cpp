@@ -554,11 +554,14 @@ void ReadRestart::command(int narg, char **arg)
 void ReadRestart::file_search(char *inpfile, char *outfile)
 {
   char *ptr;
+  char *dummyname = "/scr_route_file_dummy_basename";
+  size_t offset;
 
   // separate inpfile into dir + filename
 
   char *dirname = new char[strlen(inpfile) + 1];
   char *filename = new char[strlen(inpfile) + 1];
+  char *inpdummy = new char[strlen(inpfile) + strlen(dummyname) + 1];
 
   if (strchr(inpfile,'/')) {
     ptr = strrchr(inpfile,'/');
@@ -570,6 +573,11 @@ void ReadRestart::file_search(char *inpfile, char *outfile)
     strcpy(dirname,"./");
     strcpy(filename,inpfile);
   }
+
+  offset = strlen(dirname);
+  strcpy(inpdummy,dirname);
+  strcpy(inpdummy+offset,dummyname);
+  utils::logmesg(lmp,"  restart inpfile = {}, inpdummy = {}\n", inpfile, inpdummy);
 
   // if filename contains "%" replace "%" with "base"
 
@@ -622,6 +630,7 @@ void ReadRestart::file_search(char *inpfile, char *outfile)
 
   // clean up
 
+  delete [] inpdummy;
   delete [] dirname;
   delete [] filename;
   delete [] pattern;
