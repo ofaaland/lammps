@@ -13,7 +13,8 @@ dihedral_style harmonic
 
 lattice sc 6.0
 variable boxlen index 4.0
-read_restart molecular-mix.%1.restart.*
+#read_restart molecular-mix.%1.restart.*
+read_restart /p/lustre1/faaland1/lammps/molecular-mix.%1.restart.*
 ## region box block -${boxlen} ${boxlen} -${boxlen} ${boxlen} -${boxlen} ${boxlen} units lattice
 ## create_box 2 box bond/types 1 angle/types 1 dihedral/types 1 extra/special/per/atom 6 &
 ##                  extra/bond/per/atom 2 extra/angle/per/atom 2 extra/dihedral/per/atom 2
