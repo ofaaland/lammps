@@ -59,9 +59,17 @@ WriteRestart::WriteRestart(LAMMPS *lmp) : Command(lmp)
 
 void WriteRestart::command(int narg, char **arg)
 {
+  int rc;
+  int restart_valid = 1; // this should be set to 0 if one or more processes cannot write output
+  int restart_flags = SCR_FLAG_OUTPUT | SCR_FLAG_CHECKPOINT;
+  char restart_name[] = "olaf_scr_restart";
+
   if (domain->box_exist == 0)
     error->all(FLERR,"Write_restart command before simulation box is defined");
   if (narg < 1) error->all(FLERR,"Illegal write_restart command");
+
+  rc = SCR_Start_output(restart_name, restart_flags);
+  utils::logmesg(lmp,"WriteRestart::command() name {} restart_flags {} rc {}\n", restart_name, restart_flags, rc);
 
   // if filename contains a "*", replace with current timestep
 
@@ -112,6 +120,9 @@ void WriteRestart::command(int narg, char **arg)
   // write single restart file
 
   write(file);
+
+  rc = SCR_Complete_output(restart_valid);
+  utils::logmesg(lmp,"WriteRestart::command() restart_valid {} rc {}\n", restart_valid, rc);
 }
 
 /* ---------------------------------------------------------------------- */

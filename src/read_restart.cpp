@@ -51,10 +51,17 @@ ReadRestart::ReadRestart(LAMMPS *lmp) : Command(lmp) {}
 
 void ReadRestart::command(int narg, char **arg)
 {
+  int rc;
+  int restart_valid = 1;  // XXX need to set to 0 if restart is invalid, but do not right now
+  char scr_restart_name[SCR_MAX_FILENAME];
+
   if (narg != 1 && narg != 2) error->all(FLERR,"Illegal read_restart command");
 
   if (domain->box_exist)
     error->all(FLERR,"Cannot read_restart after simulation box is defined");
+
+  rc = SCR_Start_restart(scr_restart_name);
+  utils::logmesg(lmp,"ReadRestart::command SCR_Start_restart rc {} name {}\n", rc, scr_restart_name);
 
   MPI_Barrier(world);
   double time1 = MPI_Wtime();
@@ -540,6 +547,9 @@ void ReadRestart::command(int narg, char **arg)
   if (comm->me == 0)
     utils::logmesg(lmp,"  read_restart CPU = {:.3f} seconds\n",
                    MPI_Wtime()-time1);
+
+  rc = SCR_Complete_restart(restart_valid);
+  utils::logmesg(lmp,"ReadRestart::command SCR_Complete_restart rc {}\n", rc);
 }
 
 /* ----------------------------------------------------------------------
