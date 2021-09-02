@@ -52,6 +52,7 @@ ReadRestart::ReadRestart(LAMMPS *lmp) : Command(lmp) {}
 void ReadRestart::command(int narg, char **arg)
 {
   int rc;
+  int scr_restart_flag;
   int restart_valid = 1;  // XXX need to set to 0 if restart is invalid, but do not right now
   char scr_restart_name[SCR_MAX_FILENAME];
 
@@ -59,6 +60,9 @@ void ReadRestart::command(int narg, char **arg)
 
   if (domain->box_exist)
     error->all(FLERR,"Cannot read_restart after simulation box is defined");
+
+  rc = SCR_Have_restart(&scr_restart_flag, scr_restart_name);
+  utils::logmesg(lmp,"ReadRestart::command SCR_Have_restart rc {} name {} flag {}\n", rc, scr_restart_name, scr_restart_flag);
 
   rc = SCR_Start_restart(scr_restart_name);
   utils::logmesg(lmp,"ReadRestart::command SCR_Start_restart rc {} name {}\n", rc, scr_restart_name);
