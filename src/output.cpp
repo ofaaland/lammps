@@ -30,6 +30,7 @@
 #include "write_restart.h"
 
 #include <cstring>
+#include <scr.h>
 
 using namespace LAMMPS_NS;
 
@@ -281,6 +282,14 @@ void Output::setup(int memflag)
 
 void Output::write(bigint ntimestep)
 {
+  int rc;
+  int restart_valid = 1; // this should be set to 0 if one or more processes cannot write output
+  int restart_flags = SCR_FLAG_OUTPUT | SCR_FLAG_CHECKPOINT;
+  char restart_name[] = "olaf_dump_restart";
+
+  rc = SCR_Start_output(restart_name, restart_flags);
+  utils::logmesg(lmp,"Output::write() name {} restart_flags {} rc {}\n", restart_name, restart_flags, rc);
+
   // next_dump does not force output on last step of run
   // wrap dumps that invoke computes or eval of variable with clear/add
 
@@ -383,6 +392,9 @@ void Output::write(bigint ntimestep)
 
   next = MIN(next_dump_any,next_restart);
   next = MIN(next,next_thermo);
+
+  rc = SCR_Complete_output(restart_valid);
+  utils::logmesg(lmp,"Output::write() restart_valid {} rc {}\n", restart_valid, rc);
 }
 
 /* ----------------------------------------------------------------------
@@ -405,6 +417,14 @@ void Output::write_dump(bigint ntimestep)
 
 void Output::write_restart(bigint ntimestep)
 {
+  int rc;
+  int restart_valid = 1; // this should be set to 0 if one or more processes cannot write output
+  int restart_flags = SCR_FLAG_OUTPUT | SCR_FLAG_CHECKPOINT;
+  char restart_name[] = "olaf_scr_restart";
+
+  rc = SCR_Start_output(restart_name, restart_flags);
+  utils::logmesg(lmp,"Output::write_restart() name {} restart_flags {} rc {}\n", restart_name, restart_flags, rc);
+
   if (restart_flag_single) {
     std::string file = restart1;
     std::size_t found = file.find("*");
@@ -426,6 +446,9 @@ void Output::write_restart(bigint ntimestep)
   }
 
   last_restart = ntimestep;
+
+  rc = SCR_Complete_output(restart_valid);
+  utils::logmesg(lmp,"Output::write_restart() restart_valid {} rc {}\n", restart_valid, rc);
 }
 
 /* ----------------------------------------------------------------------
