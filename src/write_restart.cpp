@@ -226,6 +226,8 @@ void WriteRestart::write(std::string file)
   // other calls to pbc and domain and comm are not made,
   //   b/c they only make sense if reneighboring is actually performed
 
+  utils::logmesg(lmp,"WriteRestart::write() entered file: {}\n", file);
+
   if (neighbor->build_once) domain->reset_box();
 
   // natoms = sum of nlocal = value to write into restart file
