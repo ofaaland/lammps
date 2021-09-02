@@ -64,8 +64,10 @@ void ReadRestart::command(int narg, char **arg)
   rc = SCR_Have_restart(&scr_restart_flag, scr_restart_name);
   utils::logmesg(lmp,"ReadRestart::command SCR_Have_restart rc {} name {} flag {}\n", rc, scr_restart_name, scr_restart_flag);
 
-  rc = SCR_Start_restart(scr_restart_name);
-  utils::logmesg(lmp,"ReadRestart::command SCR_Start_restart rc {} name {}\n", rc, scr_restart_name);
+  if (scr_restart_flag == 1) {
+	  rc = SCR_Start_restart(scr_restart_name);
+	  utils::logmesg(lmp,"ReadRestart::command SCR_Start_restart rc {} name {}\n", rc, scr_restart_name);
+  }
 
   MPI_Barrier(world);
   double time1 = MPI_Wtime();
