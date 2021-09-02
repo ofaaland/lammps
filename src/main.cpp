@@ -46,6 +46,7 @@ using namespace LAMMPS_NS;
 int main(int argc, char **argv)
 {
   MPI_Init(&argc, &argv);
+  SCR_Config("SCR_PREFIX=/p/lustre1/faaland1/lammps");
   if (SCR_Init()) MPI_Abort(MPI_COMM_WORLD, 1);
 
   MPI_Comm lammps_comm = MPI_COMM_WORLD;
